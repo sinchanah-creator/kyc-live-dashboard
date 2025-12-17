@@ -1,9 +1,69 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>KYC Dashboard</title>
+  <title>KYC Live Dashboard</title>
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  Dashboard coming soon
+
+  <h1>KYC Live Dashboard</h1>
+
+  <!-- KPI CARDS -->
+  <div id="kpi-section">
+
+    <div class="kpi-card">
+      <h3>Total KYC</h3>
+      <p id="total-kyc">--</p>
+    </div>
+
+    <div class="kpi-card">
+      <h3>Verified</h3>
+      <p id="verified-kyc">--</p>
+    </div>
+
+    <div class="kpi-card">
+      <h3>NV</h3>
+      <p id="nv-kyc">--</p>
+    </div>
+
+    <div class="kpi-card">
+      <h3>2+ Attempts</h3>
+      <p id="attempts-kyc">--</p>
+    </div>
+
+  </div>
+
+  <!-- CHARTS -->
+  <div id="charts-section">
+    <h2>Charts</h2>
+    <p>Charts will appear here</p>
+  </div>
+
+  <!-- TABLE -->
+  <div id="table-section">
+    <h2>KYC Details</h2>
+
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>User ID</th>
+          <th>Document Type</th>
+          <th>KYC Status</th>
+          <th>Attempts</th>
+        </tr>
+      </thead>
+
+      <tbody id="kyc-table-body">
+        <tr>
+          <td colspan="5">Data will appear here</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script src="script.js"></script>
+
 </body>
 </html>
