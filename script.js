@@ -1,30 +1,47 @@
-// STEP 1: Paste your Google Sheet CSV link here
+// 🔹 STEP 1: Paste your Google Sheet CSV link here
 const SHEET_URL = "PASTE_YOUR_GOOGLE_SHEET_CSV_LINK_HERE";
 
-// STEP 2: Fetch live data
+// 🔹 STEP 2: Fetch data from Google Sheet
 fetch(SHEET_URL)
   .then(response => response.text())
   .then(csvText => {
-    const rows = csvText.split("\n").slice(1); // skip header row
+    const rows = csvText.split("\n").slice(1); // skip header
 
-    let total = 0;
-    let verified = 0;
-    let nv = 0;
-    let attempts2plus = 0;
+    let totalKYC = 0;
+    let verifiedCount = 0;
+    let nvCount = 0;
+    let attempts2Plus = 0;
 
     rows.forEach(row => {
       if (!row.trim()) return;
 
       const cols = row.split(",");
 
-      const kycStatus = cols[4]?.trim();   // KYC Status column
-      const attempts = parseInt(cols[6]);  // Attempts column
+      const kycStatus = cols[4]?.trim();   // Column E
+      const attemptsText = cols[7]?.trim(); // Column H
 
-      total++;
+      totalKYC++;
 
-      if (kycStatus === "Verified") verified++;
-      if (kycStatus === "NV") nv++;
-      if (attempts >= 2) attempts2plus++;
+      if (kycStatus === "Verified") {
+        verifiedCount++;
+      }
+
+      if (kycStatus === "NV") {
+        nvCount++;
+      }
+
+      // Count 2+ attempts
+      if (attemptsText && attemptsText.includes("2")) {
+        attempts2Plus++;
+      }
     });
 
-    /
+    // 🔹 STEP 3: Update KPI cards
+    document.getElementById("total-kyc").innerText = totalKYC;
+    document.getElementById("verified-kyc").innerText = verifiedCount;
+    document.getElementById("nv-kyc").innerText = nvCount;
+    document.getElementById("attempts-kyc").innerText = attempts2Plus;
+  })
+  .catch(error => {
+    console.error("Error loading KYC data:", error);
+  });
